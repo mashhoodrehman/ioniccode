@@ -1,0 +1,115 @@
+<ion-header>
+
+  <ion-navbar  color="primary">
+    <ion-title>Chat</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+<ion-list>
+    <ng-container >
+      <ion-item>
+        <ion-label>
+          <div>
+            <div class="message-text right">
+              Hello How are you?
+              
+              <div class="message-time">
+                  2:30PM
+              </div>
+            </div>
+            
+          </div>
+          <div>
+            <ion-avatar start>
+              <img class="user-image" src="assets/img/1.png" />
+            </ion-avatar>
+            <div class="message-user">
+              Rashid Iqbal
+            </div>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container >
+        <ion-item>
+          <ion-label>
+            <div>
+              <ion-avatar end>
+                <img class="user-image" src="assets/img/2.png" />
+              </ion-avatar>
+              <div class="message-user">
+                Solos
+              </div>
+              <div class="message-text left">
+                I am Good, What about you?
+                
+                <div class="message-time">
+                    2:31PM
+                </div>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container >
+          <ion-item>
+            <ion-label>
+              <div>
+                <ion-avatar end>
+                  <img class="user-image" src="assets/img/2.png" />
+                </ion-avatar>
+                <div class="message-user">
+                    Solos
+                </div>
+                <div class="message-text left">
+                  Are you going?
+                  
+                  <div class="message-time">
+                      2:31PM
+                  </div>
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container >
+            <ion-item>
+              <ion-label>
+                <div>
+                  <div class="message-text right">
+                   Yes i am going?
+                    
+                    <div class="message-time">
+                        2:35PM
+                    </div>
+                  </div>
+                  
+                </div>
+                <div>
+                  <ion-avatar start>
+                    <img class="user-image" src="assets/img/1.png" />
+                  </ion-avatar>
+                  <div class="message-user">
+                    Rashid Iqbal
+                  </div>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ng-container>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-textarea class="message-input" placeholder="Type a message here" rows="1" autocapitalize="off"
+                  #messageInput
+                  (keydown.enter)="sendMessage();false"></ion-textarea>
+    <ion-buttons end>
+      <button color="primary" ion-button clear icon-only (click)="sendMessage()">
+        <ion-icon name="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,14 @@
+page-messages {
+    h2,h3{
+        color: black !important;
+    }
+    ion-button {
+      --box-shadow: none;
+    }
+  
+    .contact-time {
+      font-size: 12px;
+      opacity: .7;
+      font-style: italic;
+    }
+  }

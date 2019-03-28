@@ -1,0 +1,7 @@
+<ion-tabs #myTabs  (ionChange)="tabChanged($event)">
+  <ion-tab color="secondary" [root]="HomePage" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab color="secondary" [root]="CategoriesPage" tabTitle="Explore" tabIcon="eye"></ion-tab>  
+  <ion-tab color="secondary" [root]="AdoutPagesPage" tabTitle="About" tabIcon="information-circle"></ion-tab>
+  <ion-tab color="secondary" [root]="MessagesPage" tabBadge="55" tabBadgeStyle="danger" tabTitle="Messages" tabIcon="chatboxes"></ion-tab>
+  <ion-tab color="secondary" [root]="ProfilePage" tabTitle="Profile" tabIcon="person"></ion-tab>
+</ion-tabs>

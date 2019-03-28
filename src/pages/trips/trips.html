@@ -1,0 +1,98 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="settings"></ion-icon>
+    </button>
+    <ion-title>
+      <span ion-text>Woohoo</span>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear>
+        <img style="width: 25px;margin-right: 8px;" src="assets/barcode.png" />
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <!--  -->
+  <!----ion-toolbar padding color="light">
+    <p ion-text no-margin class="text-white">
+      <strong>4</strong> results found!
+    </p>
+  </ion-toolbar-->
+
+</ion-header>
+
+<ion-content class="trips detail-bg">
+  
+
+  <div padding>
+    <button ion-button round full (click)="newPost()">Register Event</button>
+  </div>
+
+  <ion-card *ngFor="let trip of trips">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
+      </ion-avatar>
+      <h2>Marty McFly</h2>
+      <p>November 5, 1955</p>
+    </ion-item>
+  
+    <img  (click)="viewDetail(trip.id)" [src]="trip.thumb">
+  
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+  
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card>
+
+
+  <!----div class="trip card" *ngFor="let trip of trips" tappable margin-bottom>
+    <div class="padding-sm primary-bg">
+      <ion-icon name="time" class="text-white"></ion-icon>
+      <span ion-text class="text-white">{{ trip.date }}</span>
+    </div>
+    <div (click)="viewDetail(trip.id)" class="background border-bottom" [ngStyle]="{'background-image': 'url(' + trip.thumb + ')'}">
+      <div class="background-filter rlt">
+        <div class="align-bottom" padding-left padding-right>
+          <h6 class="pull-left text-white" ion-text>{{ trip.name }}</h6>
+          
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <div class="padding-sm">
+      <span (click)="viewDetail(trip.id)" class="pull-left" ion-text>{{ trip.name }}</span>
+      <span class="pull-right text-white" ion-text>
+        <ion-icon name="chatboxes" style="font-size: 30px;color: #000;" ></ion-icon>
+        <ion-icon name="heart" style="font-size: 30px;color: #000;"></ion-icon>
+        <ion-icon name="person" style="font-size: 30px;color: #000;"></ion-icon>
+      </span>
+      <p style="text-align: left;margin-top: 45px;">
+          test test test test test test test test test test test test test test test test test test test test  ....
+      </p>
+    </div>
+  </div-->
+</ion-content>

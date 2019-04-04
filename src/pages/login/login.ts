@@ -8,9 +8,9 @@ import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 
-
 import { TabsPage } from "../tabs/tabs";
 import { CommonserviceProvider } from "../../providers/commonservice/commonservice";
+import { AddPostPage } from "../add-post/add-post";
 
 @Component({
   selector: 'page-login',
@@ -28,20 +28,30 @@ export class LoginPage {
 
   constructor(public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController  , public loading: LoadingController , private http: HttpClient , public provider: CommonserviceProvider) {
     this.token = localStorage.getItem('token')
+    if(this.token){
+      this.provider.getApiData('check').then((res: any) => {
+        if(res.status == "Token is Invalid"){
+          localStorage.removeItem('token')
+        }
+        else{
+          
+          this.nav.setRoot(TabsPage);
+        }
+      })
+    }
+    
+    // this.nav.setRoot(TabsPage);
     // this.nav.setRoot(TabsPage);
     this.menu.swipeEnable(false);
   }
+
 
   // go to register page
   register() {
     this.nav.setRoot(RegisterPage);
   }
-
   // login and go to home page
   login() {
-   
-
-
     if(this.email.value==""){
       let alert = this.forgotCtrl.create({
       
@@ -74,9 +84,7 @@ export class LoginPage {
       content: 'Processing please wait…',
       
       });
-      loader.present().then(() => {
-        // this.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU1MzQzNzUyMCwiZXhwIjoxNTUzNDQxMTIwLCJuYmYiOjE1NTM0Mzc1MjAsImp0aSI6Ik4wZ2lYOHg5M1J2NDU5aVgiLCJzdWIiOjIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.PyzAsNTVp_ZLoR3CS5yUQjVfG6yFohLp98DkIjdcAPU";
-        
+      loader.present().then(() => { 
         let data = {
 
           email: this.email.value,
@@ -84,10 +92,10 @@ export class LoginPage {
           password: this.password.value
               };
               this.token = "";
-        this.provider.postApi('login' , this.token ,  data)
-        .subscribe(res => {
+        this.provider.postApi('login' ,  data)
+        .then(res => {
         
-        console.log(res)
+        console.log(res , 'info')
         this.result = res;
 
         

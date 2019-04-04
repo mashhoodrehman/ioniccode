@@ -1,16 +1,18 @@
 import {Injectable} from "@angular/core";
 import {TRIPS} from "./mock-trips";
+import { CommonserviceProvider } from "../providers/commonservice/commonservice";
 
 @Injectable()
 export class TripService {
   private trips: any;
+  public result: any;
 
-  constructor() {
+  constructor(public provider: CommonserviceProvider) {
     this.trips = TRIPS;
   }
 
   getAll() {
-    return this.trips;
+    return 'ok';
   }
 
   getItem(id) {

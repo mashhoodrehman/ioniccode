@@ -1,8 +1,11 @@
 import { Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import {FormControl} from "@angular/forms";
-import { } from 'googlemaps';
+import {  } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import { CommonserviceProvider } from '../../providers/commonservice/commonservice';
+import { CameraOptions, Camera } from '@ionic-native/camera';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the AddPostPage page.
@@ -21,34 +24,43 @@ export class AddPostPage {
   public address:string = '';
   public start_date='';
   public end_date='';
+  public token:string;
 
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
+  public result:any;
+  public pic:any = 'dfsdfd';
+  public imageLists = [];
+  public categories = [];
+  public category ;
 
   @ViewChild("search")
   public searchElementRef;
 
-constructor(public navCtrl: NavController, private mapsAPILoader: MapsAPILoader,
-            private ngZone: NgZone)  {
+constructor(public navCtrl: NavController,  public forgotCtrl: AlertController,private mapsAPILoader: MapsAPILoader,
+            private ngZone: NgZone , public provider: CommonserviceProvider , private camera: Camera)  {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-
+    this.token = localStorage.getItem('token');
     //create search FormControl
     this.searchControl = new FormControl();
-
+    this.provider.getApiData('getcategories').then((res:any ) => {
+        this.categories = res;
+    })
     //set current position
     this.setCurrentPosition();
 
 }
 
-ionViewDidLoad() {
+ionViewDidLoad() { 
     //set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
+    
 
     //create search FormControl
     this.searchControl = new FormControl();
@@ -94,10 +106,68 @@ ionViewDidLoad() {
   }
 
   public storepost(){
-    alert(this.address)
-    alert(this.event_title)
-    alert(this.start_date)
-    alert(this.end_date)
+    let data = {
+        address: this.address,
+        event_title: this.event_title,
+        lat: this.latitude,
+        lon: this.longitude,
+        start_date: this.start_date,
+        end_date: this.end_date,
+        profile: 'profile image',
+        images: this.imageLists,
+        category: this.category,
+    }
+    console.log(data);
+    this.provider.postApi('storeevent' , data)
+    .then(res => {
+    console.log(res , 'info')
+    this.result = res;
+    let alert = this.forgotCtrl.create({
+      
+        title:"Success",
+        
+        subTitle:"Event has been saved!",
+        
+        buttons: ['OK']
+        
+        });
+        alert.present();
+    this.navCtrl.setRoot(TabsPage);
+    });
+
+}
+
+
+storepic(){
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        correctOrientation: true,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      
+      this.camera.getPicture(options).then((imageData) => { 
+            //here iam converting image data to base64 data and push a data to array value.  
+            // this.imageLists.push('data:image/jpeg;base64,' + results[index]);  
+            this.imageLists.push('data:image/jpeg;base64,' + imageData);  
+       this.pic = 'data:image/jpeg;base64,' + imageData;
+        
+       // imageData is either a base64 encoded string or a file URI
+       // If it's base64 (DATA_URL):
+      }, (err) => {
+       // Handle error
+      });
+}
+
+selectfieldonchange(val) {
+    this.category = val;
+    console.log(val, 'value')
+  }
+
+imgremove(imgg , ii){
+    this.imageLists.splice(ii, 1);
+   console.log(imgg, ii) 
 }
 
 

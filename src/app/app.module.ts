@@ -32,6 +32,9 @@ import { AddPostPage } from '../pages/add-post/add-post';
 import { ChatPage } from '../pages/chat/chat';
 import { ProfilePage } from '../pages/profile/profile';
 import { CommonserviceProvider } from '../providers/commonservice/commonservice';
+import { HttpModule } from '@angular/http';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 // import services
 // end import services
@@ -63,6 +66,7 @@ import { CommonserviceProvider } from '../providers/commonservice/commonservice'
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: true,
@@ -101,6 +105,7 @@ import { CommonserviceProvider } from '../providers/commonservice/commonservice'
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     Keyboard,
     ActivityService,
     TripService,

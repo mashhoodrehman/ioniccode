@@ -92,4 +92,6 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-sqlite-storage" spec="~2.1.4" />
     <engine name="ios" spec="^4.5.4" />
+    <allow-navigation href="http://192.168.1.112:8100" sessionid="e6cb708e" />
+    <allow-navigation href="http://192.168.0.103:8100" sessionid="ea3e66d2" />
 </widget>

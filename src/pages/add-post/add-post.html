@@ -26,8 +26,25 @@
     <ion-datetime name="end_date" [(ngModel)]="end_date"></ion-datetime>
   </ion-item>
 
+    <ion-item>
+        <ion-label floating>Categories</ion-label>
+        <ion-select [(ngModel)]="category" multiple="true">
+          <ion-option *ngFor="let category of categories" [value]="category.id">{{category.title}}</ion-option>
+        </ion-select>
+      </ion-item>
 
-<ion-icon style="font-size: 109px;text-align: center;display: flex;margin: auto;width: 83px;" name="camera"></ion-icon>
+<ion-icon (click)="storepic()" style="font-size: 109px;text-align: center;display: flex;margin: auto;width: 83px;" name="camera"></ion-icon>
+
+
+    <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let img of imageLists; index as i">
+              <span class="close" (click)="imgremove( i)">&times;</span>
+            <img [src]="img">
+          </ion-col>
+        </ion-row>
+        </ion-grid>
+
 
 </ion-content>
 <ion-footer>

@@ -1,7 +1,8 @@
 import {Component, ViewChild, ElementRef} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, NavParams} from "ionic-angular";
 import {TripService} from "../../services/trip-service";
 import {CheckoutTripPage} from "../checkout-trip/checkout-trip";
+import { CommonserviceProvider } from "../../providers/commonservice/commonservice";
 declare var google;
 
 @Component({
@@ -15,19 +16,26 @@ export class TripDetailPage {
   public adults = 2;
   // number of children
   public children = 0;
+  public result:any;
+  public comment:string;
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  constructor(public nav: NavController, public tripService: TripService) {
-    // set sample data
-    this.trip = tripService.getItem(1);
-    
+  constructor(public nav: NavController, public tripService: TripService , public provider: CommonserviceProvider , public navParams: NavParams) {
+    // set sample dat
+    this.result = this.provider.getApiData('postdetail/'+navParams.get('id')).then((res: any)=> {
+      this.result = res.data;
+      console.log(this.result , 'fdf')
+      this.initMap();
+    })
+    this.trip = tripService.getItem(1);    
   }
   ionViewDidEnter(){
     
-    this.initMap();
+    
   }
+  
   // minus adult when click minus button
   minusAdult() {
     this.adults--;
@@ -54,7 +62,7 @@ export class TripDetailPage {
   }
   loadMap(){
 
-    let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+    let latLng = new google.maps.LatLng(this.result.lat, this.result.long);
 
     let mapOptions = {
       center: latLng,
@@ -69,7 +77,7 @@ export class TripDetailPage {
     var map;
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 16,
-      center: new google.maps.LatLng(-33.91722, 151.23064),
+      center: new google.maps.LatLng(this.result.lat, this.result.long),
       //mapTypeId: 'ROADMAP'.toLowerCase()
       //mapTypeId: 'SATELLITE'.toLowerCase()
       //mapTypeId: 'HYBRID'.toLowerCase()
@@ -165,6 +173,15 @@ export class TripDetailPage {
     });
   }
 
-
+  addcomment(){
+    let data = {
+      postid: this.navParams.get('id'),
+      comment: this.comment
+    }
+    this.provider.postApi('savecomment' , data).then((res: any) => {
+      this.result = res.data;
+      this.comment = '';
+    })
+  }
 
 }

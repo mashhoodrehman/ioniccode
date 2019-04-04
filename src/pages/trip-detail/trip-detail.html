@@ -38,11 +38,21 @@
 
   <!--high light-->
   <div class="border-bottom" padding>
-    <span ion-text color="dark" class="bold">HIGHLIGHT</span>
+    <span ion-text color="dark" class="bold">Start Date</span>
     <ul class="highlight">
-      <li *ngFor="let highlight of trip.highlights">
+      <li>
         <ion-icon name="checkmark" class="text-green"></ion-icon>
-        <span ion-text color="primary">{{ highlight }}</span>
+        <span ion-text color="primary">{{ result.start_date | date: 'medium'}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="border-bottom" padding>
+    <span ion-text color="dark" class="bold">End Date</span>
+    <ul class="highlight">
+      <li>
+        <ion-icon name="checkmark" class="text-green"></ion-icon>
+        <span ion-text color="primary">{{ result.end_date | date: 'medium'}}</span>
       </li>
     </ul>
   </div>
@@ -93,17 +103,35 @@
   <!--description-->
   <div class="border-bottom" padding>
     <span ion-text color="primary" class="bold">DESCRIPTION</span>
-    <p ion-text>{{ trip.description }}</p>
+    <p ion-text>{{ result.title }}</p>
   </div>
 
   <!--address-->
   <div class="border-bottom" padding>
     <span ion-text color="primary" class="bold">LOCATION</span>
-    <p ion-text>{{ trip.location }}</p>
+    <p ion-text>{{ result.location }}</p>
   </div>
 
   <div #map id="map"></div>  
 
+  <ion-item *ngFor="let comment of result.commentsdata">
+    <ion-avatar item-start>
+      <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
+    </ion-avatar>
+    <h2>{{comment.user.name}}</h2>
+    <ion-card-content>
+      <p>{{comment.comment}}</p>
+    </ion-card-content>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Enter Comment</ion-label>
+    <ion-input name="comment" [(ngModel)]="comment"></ion-input>
+  </ion-item>
+  <ion-item>
+    <button ion-button full (click)="addcomment()">Add comment</button>
+  </ion-item>
 
 
+  
 </ion-content>

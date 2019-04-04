@@ -1,5 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { LoadingController, AlertController, App } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 /*
   Generated class for the CommonserviceProvider provider.
@@ -10,18 +12,77 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommonserviceProvider {
 
-  constructor(public http: HttpClient) {
+  loading=null;
+  public baseUrl='https://seller.wbminternational.pk/public/';
+   public apiUrl='api/';
+  constructor( public http: Http,
+    public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    public app: App,
+    private toastCtrl: ToastController) {
     console.log('Hello CommonserviceProvider Provider');
+    
+  }
+  startLoading() {
+    if (this.loading == null) {
+      this.loading = this.loadingCtrl.create({
+        //spinner: 'hide',
+        content: 'Loading Please Wait...'
+      });
+
+      this.loading.present();
+    }
+  }
+getApiData(url, isLoading = true) {
+    if (isLoading)
+      this.startLoading();
+    return new Promise((resolve, reject) => {
+      this.http.get(
+
+        this.baseUrl+this.apiUrl + url //+ '?token=' + localStorage.getItem('token')
+        ,{headers: new Headers({'Authorization':'Bearer '+localStorage.getItem('token')})}
+
+      ).subscribe(res => {
+        if (isLoading)
+          this.closeLoading();
+        resolve(res.json());
+      }, (err) => {
+        this.closeLoading();
+           let er = JSON.parse(err._body);
+        reject(err);
+      });
+    });
   }
 
-  postApi(url, header:string , data){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    url = 'http://localhost:8000/api/'+url;
+  postApi(url, values = {}, isLoading = true) {
+    if (isLoading)
+    this.startLoading();
+  return new Promise((resolve, reject) => {
 
-    return this.http.post(url,data, {headers: new HttpHeaders().set('Content-Type', 'application/json').set('value' , 'Bearer' + header)});
+    this.http.post(
 
+      this.baseUrl+this.apiUrl + url
+      , values
+      ,{headers: new Headers({'Authorization':'Bearer '+localStorage.getItem('token')})}
+
+    ).subscribe(res => {
+      if (isLoading)
+        this.closeLoading();
+      resolve(res.json());
+    }, (err) => {
+      this.closeLoading();
+        let er = JSON.parse(err._body);
+        reject(err);
+    });
+  });
 }
+
+  closeLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
+    }
+  }
 
 
 

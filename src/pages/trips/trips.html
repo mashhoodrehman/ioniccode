@@ -30,38 +30,46 @@
     <button ion-button round full (click)="newPost()">Register Event</button>
   </div>
 
-  <ion-card *ngFor="let trip of trips">
+  <ion-card *ngFor="let trip of result">
+    
 
     <ion-item>
       <ion-avatar item-start>
         <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
       </ion-avatar>
-      <h2>Marty McFly</h2>
-      <p>November 5, 1955</p>
+      <h2>{{trip.user.name}}</h2>
+      <p>{{trip.created_at | date }}</p>
     </ion-item>
   
-    <img  (click)="viewDetail(trip.id)" [src]="trip.thumb">
+    <img  (click)="viewDetail(trip.id)" src="assets/img/trip/thumb/trip_5.jpg">
   
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      <p>{{trip.title}}</p>
     </ion-card-content>
   
     <ion-row>
       <ion-col>
         <button ion-button icon-start clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Likes</div>
+          <ion-icon name="ios-thumbs-up"></ion-icon>
+          <div (click)="like(trip.id , trip.likedata.id , $event)" id="{{trip.id}}like">{{trip.likes_count}} Likes</div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-start clear small>
           <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
+          <div>{{trip.comments_count}} Comments</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="star"></ion-icon>
+          <div *ngIf="trip.interestval == true; else elseblock" (click)="showinterest(trip.id)" id="{{trip.id}}interest">Interested</div>
+          <ng-template #elseblock><div (click)="showinterest(trip.id)" id="{{trip.id}}interest">Interest</div></ng-template>
         </button>
       </ion-col>
       <ion-col align-self-center text-center>
         <ion-note>
-          11h ago
+          {{trip.timeago}} ago
         </ion-note>
       </ion-col>
     </ion-row>

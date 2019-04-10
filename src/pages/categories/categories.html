@@ -10,17 +10,14 @@
       <ion-searchbar></ion-searchbar>
   </ion-navbar>
   <ion-segment mode="md" [(ngModel)]="segment">
-      <ion-segment-button value="today">
+      <ion-segment-button value="today" (click) ="datewise('today')">
         Today
       </ion-segment-button>
-      <ion-segment-button value="this-week">
+      <ion-segment-button value="this-week" (click) ="datewise('weekly')">
         This Week
       </ion-segment-button>
-      <ion-segment-button value="this-weekend">
-        This Weekend
-      </ion-segment-button>
-      <ion-segment-button value="next-weekend">
-        Next Week
+      <ion-segment-button value="this-weekend" (click) ="datewise('monthly')">
+        This Month
       </ion-segment-button>
     </ion-segment>
 
@@ -28,207 +25,27 @@
 
 
 <ion-content>
-   <ion-grid>
-    <ion-row>
-        <ion-col>
-          <button ion-button full >For You</button>
-        </ion-col>
-        <ion-col>
-          <button ion-button full >Near By Location</button>
-        </ion-col>  
-    </ion-row> 
-   </ion-grid>
+  
 
-
-   <h1 style="text-align: center;">Browse By Categories</h1>
-
+  
+   
 
   <ion-grid>
     <ion-row>
-      <ion-col col-6>
+      <ion-col col-6 *ngFor="let cate of result">
           <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
+              <div class="categoryimages">
+                  <img src="https://lorempixel.com/200/300" />
+                  <div class="positioner">
+                      <!-- <ion-icon name="text" class="caticon"></ion-icon> -->
+                  </div>
+                  <div class="categorytitle">
+                    <h4>{{cate.title}}</h4>
+                  </div>
+                </div>
             </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-      <ion-col col-6>
-          <ion-card>
-
-              <ion-card-header>
-                Title of category
-              </ion-card-header>
-            
-              <ion-card-content>
-                <img style="width: 100%" src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png"/>
-              </ion-card-content>
-            
-            </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+            </ion-col>
+            </ion-row>
+            </ion-grid>
 
 </ion-content>

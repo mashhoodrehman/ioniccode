@@ -141,6 +141,7 @@ ionViewDidLoad() {
 storepic(){
     const options: CameraOptions = {
         quality: 100,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         correctOrientation: true,
@@ -165,9 +166,11 @@ selectfieldonchange(val) {
     console.log(val, 'value')
   }
 
-imgremove(imgg , ii){
-    this.imageLists.splice(ii, 1);
-   console.log(imgg, ii) 
+imgremove(ii){
+    console.log(this.imageLists , 'images')
+    this.imageLists.splice(ii , 1);
+    console.log(this.imageLists , 'images')
+   console.log(ii)
 }
 
 

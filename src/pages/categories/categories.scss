@@ -18,3 +18,37 @@ page-categories {
         }
     }
 }
+
+
+  
+  
+  
+  .positioner {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .caticon {
+    position: absolute;
+    right: -25px;
+    bottom: -30px;
+    font-size: 60px;
+    opacity: 0.7;
+    color:   #737373;    
+
+  }
+
+  .categorytitle {
+    padding: 7%;
+
+}
+
+.categorytitle h4{
+    font-size: 16px;
+    color: #808080
+
+
+}

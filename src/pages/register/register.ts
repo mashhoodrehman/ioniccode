@@ -82,17 +82,6 @@ export class RegisterPage {
         loader.dismiss()
         
         if(this.result.token){
-          let alert = this.forgotCtrl.create({
-          
-          title:'CONGRATS',
-          
-          subTitle:("token has been saved"),
-          
-          buttons: ['OK']
-          
-          });
-          
-          alert.present();
           localStorage.setItem('token' , this.result.token);
           this.nav.setRoot(TabsPage);
           
@@ -104,7 +93,7 @@ export class RegisterPage {
           
           title:'ERROR',
           
-          subTitle:'Your Login Username or Password is invalid',
+          subTitle:'Email already taken',
           
           buttons: ['OK']
           

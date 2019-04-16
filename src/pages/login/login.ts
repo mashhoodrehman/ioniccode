@@ -102,17 +102,7 @@ export class LoginPage {
         loader.dismiss()
         
         if(this.result.token){
-          let alert = this.forgotCtrl.create({
           
-          title:'CONGRATS',
-          
-          subTitle:("token has been saved"),
-          
-          buttons: ['OK']
-          
-          });
-          
-          alert.present();
           localStorage.setItem('token' , this.result.token);
           this.nav.setRoot(TabsPage);
           
